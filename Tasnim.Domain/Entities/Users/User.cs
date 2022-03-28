@@ -12,6 +12,8 @@ namespace Tasnim.Domain.Entities.Users
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
+        
+        [EmailAddress]
         public string Email { get; set; }
         public Religion Religion { get; set; }
         public string Password { get; set; }

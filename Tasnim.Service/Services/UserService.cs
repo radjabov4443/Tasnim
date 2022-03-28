@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Tasnim.Data.Repositories.Interfaces;
 using Tasnim.Domain.Common;
 using Tasnim.Domain.Entities.Users;
+using Tasnim.Service.Configurations;
 using Tasnim.Service.DTOs;
 using Tasnim.Service.Interfaces;
 
@@ -26,18 +27,26 @@ namespace Tasnim.Service.Services
 
             userMapper = new Mapper(configUser);
         }
+        
         public async Task<BaseResponse<User>> CreateAsync(UserForRegistrationDto userDto)
         {
             var response = new BaseResponse<User>();
 
             var existUser = await userRepository.GetAsync(p => p.Email == userDto.Email);
+            
             if (existUser is not null)
             {
                 response.Error = new ErrorModel(400, "User is exist");
                 return response;
             }
 
-            response.Data = userMapper.Map<UserForRegistrationDto, User>(userDto);
+            var result = userMapper.Map<UserForRegistrationDto, User>(userDto);
+
+            result.Password = HashPassword.Create(result.Password);
+
+            await userRepository.CreateAsync(result);
+
+            response.Data = result;
 
             return response;
         }
