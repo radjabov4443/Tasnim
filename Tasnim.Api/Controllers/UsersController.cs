@@ -18,9 +18,11 @@ namespace Tasnim.Api.Controllers
         }
 
         [HttpPost]
-        public ValueTask<User> Create(UserForRegistrationDto userDto)
+        public async ValueTask<ActionResult<User>> Create(UserForRegistrationDto userDto)
         {
-            throw new NotImplementedException();
+            var result = await userService.CreateAsync(userDto);
+
+            return result == null ? BadRequest(result) : Ok(result);
         }
     }
 }

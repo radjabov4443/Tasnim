@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Tasnim.Domain.Common;
+using Tasnim.Domain.Enums;
 
 namespace Tasnim.Domain.Entities.Users
 {
@@ -10,6 +11,7 @@ namespace Tasnim.Domain.Entities.Users
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public Religion Religion { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
     }
