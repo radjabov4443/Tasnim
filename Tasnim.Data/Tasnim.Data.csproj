@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Interfaces\" />
-    <Folder Include="Repositories\Services\" />
+    <ProjectReference Include="..\Tasnim.Domain\Tasnim.Domain.csproj" />
   </ItemGroup>
 
 </Project>
