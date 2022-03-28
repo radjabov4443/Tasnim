@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Tasnim.Data\Tasnim.Data.csproj" />
+    <ProjectReference Include="..\Tasnim.Service\Tasnim.Service.csproj" />
   </ItemGroup>
 
 </Project>
