@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tasnim.Data.Contexts;
+﻿using Tasnim.Data.Contexts;
 using Tasnim.Data.Repositories.Interfaces;
 using Tasnim.Domain.Entities.Users;
 

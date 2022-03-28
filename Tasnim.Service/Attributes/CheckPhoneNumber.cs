@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Tasnim.Service.Attributes
 {
-    internal class CheckPhoneNumber : ValidationAttribute
+    public class CheckPhoneNumber : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

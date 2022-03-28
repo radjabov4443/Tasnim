@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using Tasnim.Domain.Entities.Users;
 using Tasnim.Service.DTOs;
@@ -20,7 +20,7 @@ namespace Tasnim.Api.Controllers
         [HttpPost]
         public ValueTask<User> Create(UserForRegistrationDto userDto)
         {
-            return
+            throw new NotImplementedException();
         }
     }
 }

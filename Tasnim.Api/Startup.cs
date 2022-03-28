@@ -26,11 +26,13 @@ namespace Tasnim.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+
             services.AddDbContext<TasnimDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("TasnimDb"));
             });
 
+            services.AddAutoMapper(typeof(MappingConfigure));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -38,6 +40,7 @@ namespace Tasnim.Api
             });
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
