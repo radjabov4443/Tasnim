@@ -15,6 +15,6 @@ namespace Tasnim.Service.Interfaces
         Task<BaseResponse<User>> GetAsync(Expression<Func<User, bool>> expression);
         Task<BaseResponse<IEnumerable<User>>> GetAllAsync(Expression<Func<User, bool>> expression = null);
         Task<BaseResponse<User>> DeleteAsync(Expression<Func<User, bool>> expression);
-        Task<BaseResponse<User>> UpdateAsync(Guid id, UserForRegistrationDto userDto);
+        Task<BaseResponse<User>> UpdateAsync(long id, UserForRegistrationDto userDto);
     }
 }
