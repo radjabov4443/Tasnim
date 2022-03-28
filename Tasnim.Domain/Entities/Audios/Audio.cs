@@ -6,6 +6,6 @@ namespace Tasnim.Domain.Entities.Audios
     {
         public long Id { get; set; }
         public string Title { get; set; }
-        public int MyProperty { get; set; }
+        public string Path { get; set; }
     }
 }

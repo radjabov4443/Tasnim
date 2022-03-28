@@ -13,8 +13,8 @@ namespace Tasnim.Data.Contexts
         public TasnimDbContext(DbContextOptions<TasnimDbContext> options)
             : base(options)
         {
+            
         }
-
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Audio> Audios { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
