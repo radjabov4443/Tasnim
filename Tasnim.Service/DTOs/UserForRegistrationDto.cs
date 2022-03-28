@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Tasnim.Service.Attributes;
 
 namespace Tasnim.Service.DTOs
@@ -9,6 +10,8 @@ namespace Tasnim.Service.DTOs
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public DateTime BirthDate { get; set; }
 
         [EmailAddress]
         [StringLength(50,
