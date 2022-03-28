@@ -3,13 +3,8 @@ using Tasnim.Service.Attributes;
 
 namespace Tasnim.Service.DTOs
 {
-    public class UserForRegistrationDto
+    public class UserForSignInDto
     {
-        [Required]
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
         [EmailAddress]
         [StringLength(50,
            ErrorMessage = "Must be beetween 5 and 50 characters",
@@ -23,8 +18,5 @@ namespace Tasnim.Service.DTOs
         [Required(ErrorMessage = "Password is required")]
         [CheckPhoneNumber]
         public string Password { get; set; }
-
-        [Required]
-        public string PhoneNumber { get; set; }
     }
 }
