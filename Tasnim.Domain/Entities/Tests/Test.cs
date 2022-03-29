@@ -1,4 +1,5 @@
-﻿using Tasnim.Domain.Common;
+﻿using Newtonsoft.Json;
+using Tasnim.Domain.Common;
 
 namespace Tasnim.Domain.Entities.Tests
 {

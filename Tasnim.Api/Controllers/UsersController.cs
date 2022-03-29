@@ -37,7 +37,7 @@ namespace Tasnim.Api.Controllers
             return StatusCode(result.Error == null ? 200 : 400, result);
         }
 
-        [HttpGet("Users")]
+        [HttpGet("All")]
         public async ValueTask<ActionResult<BaseResponse<IQueryable<User>>>> GetAll()
         {
             var result = await userService.GetAllAsync();

@@ -32,6 +32,7 @@ namespace Tasnim.Api
                 options.UseNpgsql(Configuration.GetConnectionString("TasnimDb"));
             });
 
+            services.AddControllers().AddNewtonsoftJson();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
