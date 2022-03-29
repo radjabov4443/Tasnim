@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tasnim.Domain.Entities.Audios;
 using Tasnim.Domain.Entities.Books;
+using Tasnim.Domain.Entities.Mentors;
+using Tasnim.Domain.Entities.Posts;
+using Tasnim.Domain.Entities.SavedContents;
+using Tasnim.Domain.Entities.Shows;
 using Tasnim.Domain.Entities.Statements;
 using Tasnim.Domain.Entities.Trainings;
 using Tasnim.Domain.Entities.Users;
@@ -21,5 +25,9 @@ namespace Tasnim.Data.Contexts
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Statement> Statements { get; set; }
         public virtual DbSet<Training> Trainings { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<SavedContent> SavedContents { get; set; }
+        public virtual DbSet<Mentor> Mentors { get; set; }
+
     }
 }

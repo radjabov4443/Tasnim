@@ -1,4 +1,5 @@
 ﻿using Tasnim.Domain.Common;
+using Tasnim.Domain.Entities.Mentors;
 
 namespace Tasnim.Domain.Entities.Audios
 {
@@ -9,5 +10,6 @@ namespace Tasnim.Domain.Entities.Audios
         public string Title { get; set; }
         public string Length { get; set; }
         public string Path { get; set; }
+        public Mentor Mentor { get; set; }
     }
 }

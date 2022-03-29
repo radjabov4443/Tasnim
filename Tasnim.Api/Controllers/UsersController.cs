@@ -5,6 +5,7 @@ using Tasnim.Domain.Entities.Users;
 using Tasnim.Service.Configurations;
 using Tasnim.Service.DTOs;
 using Tasnim.Service.Interfaces;
+using Tasnim.Domain.Common;
 
 namespace Tasnim.Api.Controllers
 {
@@ -19,53 +20,53 @@ namespace Tasnim.Api.Controllers
         }
 
         [HttpPost]
-        public async ValueTask<ActionResult<User>> Create(UserForRegistrationDto userDto)
+        public async ValueTask<ActionResult<BaseResponse<User>>> Create(UserForRegistrationDto userDto)
         {
             var result = await userService.CreateAsync(userDto);
 
-            return result == null ? BadRequest(result) : Ok(result);
+            return StatusCode(result.Error == null ? 200 : 400, result);
         }
 
         [HttpGet]
-        public async ValueTask<ActionResult<User>> SignIn([FromQuery] UserForSignInDto user)
+        public async ValueTask<ActionResult<BaseResponse<User>>> SignIn([FromQuery] UserForSignInDto user)
         {
             var result =
                 await userService.GetAsync(p => p.Email == user.Email &&
                 p.Password == HashPassword.Create(user.Password));
 
-            return result == null ? NotFound(result) : Ok(result);
+            return StatusCode(result.Error == null ? 200 : 400, result);
         }
 
-        [HttpGet]
-        public async ValueTask<ActionResult<IQueryable<User>>> GetAll()
+        /*[HttpGet]
+        public async ValueTask<ActionResult<BaseResponse<IQueryable<User>>>> GetAll()
         {
             var result = await userService.GetAllAsync();
 
-            return result == null ? NoContent() : Ok(result);
-        }
+            return StatusCode(result.Error == null ? 200 : 204, result);
+        }*/
 
         [HttpGet("{id}")]
-        public async ValueTask<ActionResult<User>> Get(long id)
+        public async ValueTask<ActionResult<BaseResponse<User>>> Get(long id)
         {
             var result = await userService.GetAsync(p => p.Id == id);
 
-            return result == null ? NotFound(result) : Ok(result);
+            return StatusCode(result.Error == null ? 200 : 404, result);
         }
 
         [HttpPut]
-        public async ValueTask<ActionResult<User>> Put([FromBody]long id, UserForRegistrationDto userDto)
+        public async ValueTask<ActionResult<BaseResponse<User>>> Put(long id, UserForRegistrationDto userDto)
         {
             var result = await userService.UpdateAsync(id, userDto);
 
-            return result == null ? NotFound(result) : Ok(result);
+            return StatusCode(result.Error == null ? 200 : 404, result);
         }
         
         [HttpDelete("{id}")]
-        public async ValueTask<ActionResult<User>> Delete(long id)
+        public async ValueTask<ActionResult<BaseResponse<User>>> Delete(long id)
         {
             var result = await userService.DeleteAsync(p => p.Id == id);
 
-            return result == null ? NotFound(result) : Ok(result);
+            return StatusCode(result.Error == null ? 200 : 404, result);
         }
     }
 }
