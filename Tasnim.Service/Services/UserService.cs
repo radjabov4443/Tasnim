@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Tasnim.Data.Repositories.Interfaces;
@@ -55,26 +55,34 @@ namespace Tasnim.Service.Services
         {
             var response = new BaseResponse<User>();
 
-            var existUser = await userRepository.GetAsync(expression);
+            var user = await userRepository.GetAsync(expression);
 
-            if(existUser is not null)
+            if(user is null)
             {
                 response.Error = new ErrorModel(404, "User is not found!");
                 return response;
             }
+            
+            user.Delete();
 
-            var result = await userRepository.UpdateAsync(existUser);
+            var result = await userRepository.UpdateAsync(user);
 
             response.Data = result;
 
             return response;
         }
 
-        public async Task<BaseResponse<IEnumerable<User>>> GetAllAsync(Expression<Func<User, bool>> expression = null)
+        public async Task<BaseResponse<IQueryable<User>>> GetAllAsync(Expression<Func<User, bool>> expression = null)
         {
-            var response = new BaseResponse<IEnumerable<User>>();
+            var response = new BaseResponse<IQueryable<User>>();
 
             var users = await userRepository.GetAllAsync(expression);
+
+            if (users is null)
+            {
+                response.Error = new ErrorModel(204, "No Content");
+                return response;
+            }
 
             response.Data = users;
 
@@ -100,8 +108,7 @@ namespace Tasnim.Service.Services
         public async Task<BaseResponse<User>> UpdateAsync(long id, UserForRegistrationDto userDto)
         {
             var response = new BaseResponse<User>();
-
-            // check for exist student
+            
             var user = await userRepository.GetAsync(p => p.Id == id);
             if (user is null)
             {

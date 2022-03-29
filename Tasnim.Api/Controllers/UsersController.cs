@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tasnim.Domain.Entities.Users;
 using Tasnim.Service.Configurations;
@@ -27,13 +27,21 @@ namespace Tasnim.Api.Controllers
         }
 
         [HttpGet]
-        public async ValueTask<ActionResult<User>> Get([FromQuery] UserForSignInDto user)
+        public async ValueTask<ActionResult<User>> SignIn([FromQuery] UserForSignInDto user)
         {
             var result =
                 await userService.GetAsync(p => p.Email == user.Email &&
                 p.Password == HashPassword.Create(user.Password));
 
-            return result == null ? BadRequest(result) : Ok(result);
+            return result == null ? NotFound(result) : Ok(result);
+        }
+
+        [HttpGet]
+        public async ValueTask<ActionResult<IQueryable<User>>> GetAll()
+        {
+            var result = await userService.GetAllAsync();
+
+            return result == null ? NoContent() : Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -41,9 +49,23 @@ namespace Tasnim.Api.Controllers
         {
             var result = await userService.GetAsync(p => p.Id == id);
 
-            return result == null ? BadRequest(result) : Ok(result);
+            return result == null ? NotFound(result) : Ok(result);
+        }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<User>> Put([FromBody]long id, UserForRegistrationDto userDto)
+        {
+            var result = await userService.UpdateAsync(id, userDto);
+
+            return result == null ? NotFound(result) : Ok(result);
         }
         
-        
+        [HttpDelete("{id}")]
+        public async ValueTask<ActionResult<User>> Delete(long id)
+        {
+            var result = await userService.DeleteAsync(p => p.Id == id);
+
+            return result == null ? NotFound(result) : Ok(result);
+        }
     }
 }

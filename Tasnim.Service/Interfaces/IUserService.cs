@@ -1,6 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Tasnim.Domain.Common;
@@ -13,7 +12,7 @@ namespace Tasnim.Service.Interfaces
     {
         Task<BaseResponse<User>> CreateAsync(UserForRegistrationDto userDto);
         Task<BaseResponse<User>> GetAsync(Expression<Func<User, bool>> expression);
-        Task<BaseResponse<IEnumerable<User>>> GetAllAsync(Expression<Func<User, bool>> expression = null);
+        Task<BaseResponse<IQueryable<User>>> GetAllAsync(Expression<Func<User, bool>> expression = null);
         Task<BaseResponse<User>> DeleteAsync(Expression<Func<User, bool>> expression);
         Task<BaseResponse<User>> UpdateAsync(long id, UserForRegistrationDto userDto);
     }
