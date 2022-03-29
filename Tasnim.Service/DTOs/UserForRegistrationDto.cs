@@ -16,7 +16,7 @@ namespace Tasnim.Service.DTOs
 
         [EmailAddress]
         [StringLength(50,
-           ErrorMessage = "Must be beetween 5 and 50 characters",
+           ErrorMessage = "Must be between 5 and 50 characters",
            MinimumLength = 5)]
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
