@@ -37,13 +37,13 @@ namespace Tasnim.Api.Controllers
             return StatusCode(result.Error == null ? 200 : 400, result);
         }
 
-        /*[HttpGet]
+        [HttpGet("Users")]
         public async ValueTask<ActionResult<BaseResponse<IQueryable<User>>>> GetAll()
         {
             var result = await userService.GetAllAsync();
 
             return StatusCode(result.Error == null ? 200 : 204, result);
-        }*/
+        }
 
         [HttpGet("{id}")]
         public async ValueTask<ActionResult<BaseResponse<User>>> Get(long id)
