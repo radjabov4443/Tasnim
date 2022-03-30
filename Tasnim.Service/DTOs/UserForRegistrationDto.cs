@@ -33,6 +33,6 @@ namespace Tasnim.Service.DTOs
         [Required]
         [CheckPhoneNumber]        
         public string PhoneNumber { get; set; }
-        public ICollection<string> TestAnswers { get; set; }
+        public ICollection<Test> TestAnswers { get; set; }
     }
 }
