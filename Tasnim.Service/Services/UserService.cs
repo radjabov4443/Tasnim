@@ -15,17 +15,11 @@ namespace Tasnim.Service.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
-        private Mapper userMapper;
-        public UserService(IUserRepository userRepository)
+        private readonly IMapper mapper;
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             this.userRepository = userRepository;
-
-            var configUser = new MapperConfiguration(
-                cfg => cfg
-                .CreateMap<UserForRegistrationDto, User>()
-                .ReverseMap());
-
-            userMapper = new Mapper(configUser);
+            this.mapper = mapper;
         }
         
         public async Task<BaseResponse<User>> CreateAsync(UserForRegistrationDto userDto)
@@ -40,7 +34,7 @@ namespace Tasnim.Service.Services
                 return response;
             }
 
-            var result = userMapper.Map<UserForRegistrationDto, User>(userDto);
+            var result = mapper.Map<User>(userDto);
 
             result.Password = HashPassword.Create(result.Password);
 
@@ -110,13 +104,25 @@ namespace Tasnim.Service.Services
             var response = new BaseResponse<User>();
             
             var user = await userRepository.GetAsync(p => p.Id == id);
+
             if (user is null)
             {
                 response.Error = new ErrorModel(404, "User not found");
                 return response;
             }
 
-            response.Data = userMapper.Map<UserForRegistrationDto, User>(userDto);
+            user.FirstName = userDto.FirstName;
+            user.LastName = userDto.LastName;
+            user.Email = userDto.Email;
+            user.BirthDate = userDto.BirthDate;
+            user.PhoneNumber = userDto.PhoneNumber;
+            user.Password = HashPassword.Create(userDto.Password);
+            user.TestAnswers = userDto.TestAnswers;
+            user.Update();
+
+            await userRepository.UpdateAsync(user);
+
+            response.Data = user;
 
             return response;
         }

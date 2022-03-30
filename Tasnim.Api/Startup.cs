@@ -9,6 +9,7 @@ using Tasnim.Data.Contexts;
 using Tasnim.Data.Repositories.Interfaces;
 using Tasnim.Data.Repositories.Services;
 using Tasnim.Service.Interfaces;
+using Tasnim.Service.Mappers;
 using Tasnim.Service.Services;
 
 namespace Tasnim.Api
@@ -36,7 +37,8 @@ namespace Tasnim.Api
                 config => config
                 .JsonSerializerOptions
                 .IgnoreReadOnlyProperties = true);
-            
+
+            services.AddAutoMapper(typeof(MapperProfile));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tasnim.Api", Version = "v1" });

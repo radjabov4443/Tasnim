@@ -15,7 +15,6 @@ namespace Tasnim.Domain.Entities.Users
         public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
@@ -23,11 +22,27 @@ namespace Tasnim.Domain.Entities.Users
         public ICollection<SavedContent> SavedContents { get; set; }
         [JsonIgnore]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+        [JsonIgnore]
+        public DateTime UpdatedDate { get; set; }
         public ItemState State { get; set; } = ItemState.Created;
+
+        private DateTime birthDate;
+
+        public DateTime BirthDate
+        {
+            get { return birthDate; }
+            set { birthDate = value.Date; }
+        }
 
         public void Delete()
         {
             State = ItemState.Deleted;
+        }
+
+        public void Update()
+        {
+            State = ItemState.Updated;
+            UpdatedDate = DateTime.Now;
         }
     }
 }

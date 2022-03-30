@@ -13,8 +13,13 @@ namespace Tasnim.Service.DTOs
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+        private DateTime birthDate;
 
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate
+        {
+            get { return birthDate.Date; }
+            set { birthDate = value.Date; }
+        }
 
         [EmailAddress]
         [StringLength(50,
