@@ -8,6 +8,7 @@ using Tasnim.Domain.Entities.Users;
 
 namespace Tasnim.Data.Repositories.Services
 {
+#pragma warning disable
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
         private readonly IMapper mapper;

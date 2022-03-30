@@ -1,6 +1,8 @@
-﻿namespace Tasnim.Data.Repositories.Interfaces
+﻿using Tasnim.Domain.Entities.Trainings;
+
+namespace Tasnim.Data.Repositories.Interfaces
 {
-    public interface ITrainingRepository
+    public interface ITrainingRepository : IGenericRepository<Training>
     {
         
     }

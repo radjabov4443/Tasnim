@@ -1,7 +1,10 @@
-﻿namespace Tasnim.Data.Repositories.Interfaces
+﻿using Tasnim.Domain.Entities.Statements;
+
+namespace Tasnim.Data.Repositories.Interfaces
 {
-    public interface IStatementRepository
+    public interface IStatementRepository : IGenericRepository<Statement>
+
     {
-        
+
     }
 }

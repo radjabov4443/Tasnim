@@ -19,4 +19,9 @@
     <ProjectReference Include="..\Tasnim.Service\Tasnim.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\AppData\Images\" />
+    <Folder Include="wwwroot\AppData\Videos\" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,9 @@
-﻿namespace Tasnim.Data.Repositories.Interfaces
+﻿using Tasnim.Domain.Entities.Posts;
+
+namespace Tasnim.Data.Repositories.Interfaces
 {
-    public interface IPostRepository
+    public interface IPostRepository : IGenericRepository<Post>
     {
-        
+
     }
 }

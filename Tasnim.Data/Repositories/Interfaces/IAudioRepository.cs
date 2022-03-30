@@ -1,6 +1,8 @@
-﻿namespace Tasnim.Data.Repositories.Interfaces
+﻿using Tasnim.Domain.Entities.Audios;
+
+namespace Tasnim.Data.Repositories.Interfaces
 {
-    public interface IAudioRepository
+    public interface IAudioRepository : IGenericRepository<Audio>
     {
         
     }
