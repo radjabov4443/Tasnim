@@ -102,25 +102,17 @@ namespace Tasnim.Service.Services
         public async Task<BaseResponse<User>> UpdateAsync(long id, UserForRegistrationDto userDto)
         {
             var response = new BaseResponse<User>();
-            
-            var user = await userRepository.GetAsync(p => p.Id == id);
 
-            if (user is null)
+            var user = mapper.Map<User>(userDto);
+            user.Update();
+            
+            var result = await userRepository.UpdateAsync(user);
+
+            if (result is null)
             {
                 response.Error = new ErrorModel(404, "User not found");
                 return response;
             }
-
-            user.FirstName = userDto.FirstName;
-            user.LastName = userDto.LastName;
-            user.Email = userDto.Email;
-            user.BirthDate = userDto.BirthDate;
-            user.PhoneNumber = userDto.PhoneNumber;
-            user.Password = HashPassword.Create(userDto.Password);
-            user.TestAnswers = userDto.TestAnswers;
-            user.Update();
-
-            await userRepository.UpdateAsync(user);
 
             response.Data = user;
 

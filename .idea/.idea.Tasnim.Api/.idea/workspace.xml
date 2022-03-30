@@ -6,7 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcb88938-f559-47d0-beba-ddb19aa04f7b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Tasnim.Api/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tasnim.Api/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tasnim.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tasnim.Api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tasnim.Data/Repositories/Services/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tasnim.Data/Repositories/Services/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tasnim.Data/Tasnim.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tasnim.Data/Tasnim.Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tasnim.Service/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tasnim.Service/Services/UserService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648537882167</updated>
       <workItem from="1648537886481" duration="9670000" />
+      <workItem from="1648638025161" duration="1201000" />
     </task>
     <task id="LOCAL-00001" summary="add other models">
       <created>1648574852947</created>
@@ -103,7 +107,7 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
