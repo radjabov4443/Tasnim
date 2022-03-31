@@ -2,9 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Tasnim.Domain.Common;
-using Tasnim.Domain.Entities.Audios;
 using Tasnim.Domain.Entities.Mentors;
-using Tasnim.Domain.Entities.Videos;
 
 namespace Tasnim.Domain.Entities.Posts
 {
@@ -14,8 +12,8 @@ namespace Tasnim.Domain.Entities.Posts
         public string Comment { get; set; }
         [Required]
         public Mentor Mentor { get; set; }
-        public Audio Audio { get; set; }
-        public Video Video { get; set; }
+        public string Audio { get; set; }
+        public string Video { get; set; }
         [JsonIgnore]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         [JsonIgnore]

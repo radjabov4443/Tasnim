@@ -4,8 +4,6 @@ using Tasnim.Domain.Entities.Books;
 using Tasnim.Domain.Entities.Mentors;
 using Tasnim.Domain.Entities.Posts;
 using Tasnim.Domain.Entities.SavedContents;
-using Tasnim.Domain.Entities.Shows;
-using Tasnim.Domain.Entities.Statements;
 using Tasnim.Domain.Entities.Trainings;
 using Tasnim.Domain.Entities.Users;
 using Tasnim.Domain.Entities.Videos;
@@ -23,7 +21,6 @@ namespace Tasnim.Data.Contexts
         public virtual DbSet<Audio> Audios { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Book> Books { get; set; }
-        public virtual DbSet<Statement> Statements { get; set; }
         public virtual DbSet<Training> Trainings { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<SavedContent> SavedContents { get; set; }

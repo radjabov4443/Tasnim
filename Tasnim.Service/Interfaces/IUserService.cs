@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -15,5 +16,6 @@ namespace Tasnim.Service.Interfaces
         Task<BaseResponse<IQueryable<User>>> GetAllAsync(Expression<Func<User, bool>> expression = null);
         Task<BaseResponse<User>> DeleteAsync(Expression<Func<User, bool>> expression);
         Task<BaseResponse<User>> UpdateAsync(long id, UserForRegistrationDto userDto);
+        Task<string> SaveImageAsync(Stream file, string fileName);
     }
 }

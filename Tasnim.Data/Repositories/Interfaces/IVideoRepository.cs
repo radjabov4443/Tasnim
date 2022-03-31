@@ -4,6 +4,6 @@ namespace Tasnim.Data.Repositories.Interfaces
 {
     public interface IVideoRepository : IGenericRepository<Video>
     {
-        
+
     }
 }

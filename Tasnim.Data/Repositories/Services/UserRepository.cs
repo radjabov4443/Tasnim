@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using Tasnim.Data.Contexts;
 using Tasnim.Data.Repositories.Interfaces;
 using Tasnim.Domain.Entities.Users;
@@ -16,7 +16,7 @@ namespace Tasnim.Data.Repositories.Services
         {
             this.mapper = mapper;
         }
-        
+
         public async Task<User> UpdateAsync(User user)
         {
             var result = dbSet.FirstOrDefault(x => x.Id == user.Id);

@@ -6,7 +6,9 @@
 
   <ItemGroup>
 	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <ProjectReference Include="..\Tasnim.Data\Tasnim.Data.csproj" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.15" />
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+	  <ProjectReference Include="..\Tasnim.Data\Tasnim.Data.csproj" />
     <ProjectReference Include="..\Tasnim.Domain\Tasnim.Domain.csproj" />
   </ItemGroup>
 

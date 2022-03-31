@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Tasnim.Data.Contexts;
 using Tasnim.Data.Repositories.Interfaces;
 using Tasnim.Data.Repositories.Services;
+using Tasnim.Service.Helpers;
 using Tasnim.Service.Interfaces;
 using Tasnim.Service.Mappers;
 using Tasnim.Service.Services;
@@ -38,13 +40,18 @@ namespace Tasnim.Api
                 .JsonSerializerOptions
                 .IgnoreReadOnlyProperties = true);
 
-            services.AddAutoMapper(typeof(MapperProfile));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tasnim.Api", Version = "v1" });
             });
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+
+            services.AddHttpContextAccessor();
+
+            // Mapper services
+            services.AddAutoMapper(typeof(MapperProfile));
+
 
         }
 
@@ -58,7 +65,14 @@ namespace Tasnim.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tasnim.Api v1"));
             }
 
+            if (app.ApplicationServices.GetService<IHttpContextAccessor>() != null)
+            {
+                HttpContextHelper.Accessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
+            }
+
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 

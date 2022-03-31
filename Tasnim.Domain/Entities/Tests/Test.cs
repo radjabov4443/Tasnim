@@ -1,6 +1,4 @@
-﻿
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Tasnim.Domain.Common;
 
 namespace Tasnim.Domain.Entities.Tests

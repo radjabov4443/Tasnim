@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Tasnim.Domain.Entities.Tests;
 using Tasnim.Service.Attributes;
-using Tasnim.Service.Configurations;
 
 namespace Tasnim.Service.DTOs
 {
@@ -36,8 +36,9 @@ namespace Tasnim.Service.DTOs
         public string Password { get; set; }
 
         [Required]
-        [CheckPhoneNumber]        
+        [CheckPhoneNumber]
         public string PhoneNumber { get; set; }
+        public IFormFile Image { get; set; }
         public ICollection<Test> TestAnswers { get; set; }
     }
 }

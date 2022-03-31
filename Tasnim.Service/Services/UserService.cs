@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -8,6 +11,7 @@ using Tasnim.Domain.Common;
 using Tasnim.Domain.Entities.Users;
 using Tasnim.Service.Configurations;
 using Tasnim.Service.DTOs;
+using Tasnim.Service.Helpers;
 using Tasnim.Service.Interfaces;
 
 namespace Tasnim.Service.Services
@@ -16,18 +20,29 @@ namespace Tasnim.Service.Services
     {
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        private readonly IConfiguration config;
+        private readonly IWebHostEnvironment env;
+        private readonly string host;
+
+        public UserService(
+            IUserRepository userRepository,
+            IMapper mapper, 
+            IConfiguration config, 
+            IWebHostEnvironment env)
         {
             this.userRepository = userRepository;
             this.mapper = mapper;
+            this.config = config;
+            this.env = env;
+            this.host = $"https://{HttpContextHelper.Context.Request.Host.Value}/Images/";
         }
-        
+
         public async Task<BaseResponse<User>> CreateAsync(UserForRegistrationDto userDto)
         {
             var response = new BaseResponse<User>();
 
             var existUser = await userRepository.GetAsync(p => p.Email == userDto.Email);
-            
+
             if (existUser is not null)
             {
                 response.Error = new ErrorModel(400, "User is exist");
@@ -36,9 +51,13 @@ namespace Tasnim.Service.Services
 
             var result = mapper.Map<User>(userDto);
 
+            result.Image = await SaveImageAsync(userDto.Image.OpenReadStream(), userDto.Image.FileName);
+
             result.Password = HashPassword.Create(result.Password);
 
             await userRepository.CreateAsync(result);
+
+            result.Image = host + result.Image;
 
             response.Data = result;
 
@@ -51,12 +70,12 @@ namespace Tasnim.Service.Services
 
             var user = await userRepository.GetAsync(expression);
 
-            if(user is null)
+            if (user is null)
             {
                 response.Error = new ErrorModel(404, "User is not found!");
                 return response;
             }
-            
+
             user.Delete();
 
             var result = await userRepository.UpdateAsync(user);
@@ -78,6 +97,12 @@ namespace Tasnim.Service.Services
                 return response;
             }
 
+            foreach (var user in users)
+            {
+                if(user.Image is not null)
+                    user.Image = host + user.Image;
+            }
+
             response.Data = users;
 
             return response;
@@ -94,9 +119,24 @@ namespace Tasnim.Service.Services
                 return response;
             }
 
+            if (user.Image is not null)
+                user.Image = host + user.Image;
+
             response.Data = user;
 
             return response;
+        }
+
+        public async Task<string> SaveImageAsync(Stream file, string fileName)
+        {
+            fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
+            string storagePath = config.GetSection("Storage:ImageUrl").Value;
+            string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
+            FileStream mainFile = File.Create(filePath);
+            await file.CopyToAsync(mainFile);
+            mainFile.Close();
+
+            return fileName;
         }
 
         public async Task<BaseResponse<User>> UpdateAsync(long id, UserForRegistrationDto userDto)
@@ -105,7 +145,7 @@ namespace Tasnim.Service.Services
 
             var user = mapper.Map<User>(userDto);
             user.Update();
-            
+
             var result = await userRepository.UpdateAsync(user);
 
             if (result is null)

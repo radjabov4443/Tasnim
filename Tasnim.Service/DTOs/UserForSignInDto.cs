@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Tasnim.Service.Attributes;
 
 namespace Tasnim.Service.DTOs
 {
