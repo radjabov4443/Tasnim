@@ -34,7 +34,9 @@ namespace Tasnim.Service.Services
             this.mapper = mapper;
             this.config = config;
             this.env = env;
-            this.host = $"https://{HttpContextHelper.Context.Request.Host.Value}/Images/";
+            this.host = 
+                $"https://{HttpContextHelper.Context.Request.Host.Value}/" +
+                $"{config.GetSection("Storage:ImageUrl").Value}/";
         }
 
         public async Task<BaseResponse<User>> CreateAsync(UserForRegistrationDto userDto)
