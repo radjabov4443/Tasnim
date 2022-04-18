@@ -16,14 +16,10 @@ namespace Tasnim.Domain.Entities.SavedContents
         [JsonIgnore]
         public DateTime SavedDate { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<Audio> Audios { get; set; }
-        public virtual ICollection<Video> Videos { get; set; }
         public virtual User User { get; set; }
         public SavedContent()
         {
             Posts = new List<Post>();
-            Audios = new List<Audio>();
-            Videos = new List<Video>();
         }
     }
 }

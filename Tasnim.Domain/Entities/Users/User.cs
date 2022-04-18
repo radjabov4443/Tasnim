@@ -25,21 +25,18 @@ namespace Tasnim.Domain.Entities.Users
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         [JsonIgnore]
         public DateTime UpdatedDate { get; set; }
+        [JsonIgnore]
         public ItemState State { get; set; } = ItemState.Created;
-
         private DateTime birthDate;
-
         public DateTime BirthDate
         {
             get { return birthDate; }
             set { birthDate = value.Date; }
         }
-
         public void Delete()
         {
             State = ItemState.Deleted;
         }
-
         public void Update()
         {
             State = ItemState.Updated;

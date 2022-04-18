@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Tasnim.Domain.Entities.Tests;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tasnim.Domain.Entities.Posts;
 using Tasnim.Service.Attributes;
 
 namespace Tasnim.Service.DTOs
 {
-    public class UserForRegistrationDto
+    public class MentorForRegistrationDto
     {
         [Required]
         public string FirstName { get; set; }
@@ -41,6 +44,5 @@ namespace Tasnim.Service.DTOs
 
         [ImageValidation]
         public IFormFile Image { get; set; }
-        public ICollection<Test> TestAnswers { get; set; }
     }
 }

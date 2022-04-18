@@ -53,7 +53,9 @@ namespace Tasnim.Service.Services
 
             var result = mapper.Map<User>(userDto);
 
-            result.Image = await SaveImageAsync(userDto.Image.OpenReadStream(), userDto.Image.FileName);
+            var url = await SaveImageAsync(userDto.Image.OpenReadStream(), userDto.Image.FileName);
+
+            result.Image = 
 
             result.Password = HashPassword.Create(result.Password);
 
@@ -132,10 +134,15 @@ namespace Tasnim.Service.Services
         public async Task<string> SaveImageAsync(Stream file, string fileName)
         {
             fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
+
             string storagePath = config.GetSection("Storage:ImageUrl").Value;
+
             string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
+
             FileStream mainFile = File.Create(filePath);
+
             await file.CopyToAsync(mainFile);
+
             mainFile.Close();
 
             return fileName;

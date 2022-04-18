@@ -17,15 +17,12 @@ namespace Tasnim.Domain.Entities.Mentors
         public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
+        public string Image { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<Audio> Audios { get; set; }
-        public virtual ICollection<Video> Videos { get; set; }
         public ItemState State { get; set; } = ItemState.Created;
         public Mentor()
         {
             Posts = new List<Post>();
-            Audios = new List<Audio>();
-            Videos = new List<Video>();
         }
     }
 }
